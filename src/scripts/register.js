@@ -1,7 +1,8 @@
 const register = async (first_name,last_name,email,password) =>{
     const response = await fetch('http://localhost/SEF-login-serverside/register-user.php', { 
     method: "post",
-    mode: 'no-cors',
+    mode: 'cors',
+    origin: 'http://127.0.0.1:5500',
     headers: {
       'Accept': 'application/json',
       'Content-Type': 'application/json'
@@ -29,9 +30,14 @@ document.getElementById('register-btn').addEventListener('click',(e)=>{
     let $email=document.getElementById('email').value;
     let $password=document.getElementById('password').value;
     register($first_name,$last_name,$email,$password).then( data =>{
-        console.log('resolved:',data);
+        // console.log('resolved:',data);
+        if(data.status==0){
+            document.getElementById('error-message').innerText=`Failed login. ${data.error}`;
+        } else{
+            window.location = "/login.html";
+        }
     }).catch((err)=>{
-        console.log('rejected',err.message)
+        // console.log('rejected',err.message)
     })
     
 })
