@@ -2,7 +2,9 @@ const register = async (email,password) =>{
     const response = await fetch('http://localhost/SEF-login-serverside/validate-user.php', { 
     method: "post",
     mode: 'cors',
+    cache: "no-cache",
     origin: 'http://127.0.0.1:5500',
+    credentials: 'include',
     headers: {
       'Accept': 'application/json',
       'Content-Type': 'application/json'
